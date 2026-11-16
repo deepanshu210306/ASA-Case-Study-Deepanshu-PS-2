@@ -167,17 +167,17 @@ def synthesize_vendor_communication(
                         "Content-Type": "application/json",
                     },
                     json={
-                        "model": "llama-3.1-8b-instant",
+                        "model": "qwen/qwen3.8-27b",
                         "messages": [{"role": "user", "content": prompt}],
                         "temperature": 0.2,
                         "max_tokens": 350,
                     },
-                    timeout=12,
+                    timeout=30,
                 )
                 if resp.status_code == 200:
                     text = resp.json()["choices"][0]["message"]["content"].strip()
                     if len(text) > 60:
-                        return text, "Groq API (llama-3.1-8b-instant)"
+                        return text, "Groq API (qwen/qwen3.8-27b)"
                 return deterministic_draft, f"Deterministic Fallback (Groq HTTP {resp.status_code})"
             except Exception as ex:
                 return deterministic_draft, f"Deterministic Fallback (Groq error: {ex})"

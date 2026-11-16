@@ -49,7 +49,7 @@ CHANNEL_JSON = "JSON + PDF upload"
 AI_OPTIONS = [
     "Deterministic Engine (Instant)",
     "Ollama Local (qwen2.5:7b)",
-    "Groq API (llama-3.1-8b-instant)",
+    "Groq API (qwen/qwen3.8-27b)",
 ]
 
 STATUS_CLASS = {
