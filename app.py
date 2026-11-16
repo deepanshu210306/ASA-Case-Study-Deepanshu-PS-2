@@ -30,6 +30,20 @@ def _load_dotenv(path: str = ".env") -> None:
                 os.environ[key] = value
 
 
+def _resolve_groq_key(sidebar_value: str = "") -> str:
+    """Prefer sidebar → env/.env → Streamlit Cloud secrets."""
+    candidate = (sidebar_value or "").strip()
+    if candidate:
+        return candidate
+    env_key = os.environ.get("GROQ_API_KEY", "").strip()
+    if env_key:
+        return env_key
+    try:
+        return str(st.secrets.get("GROQ_API_KEY", "")).strip()
+    except Exception:
+        return ""
+
+
 _load_dotenv()
 
 # -------------------------------------------------------------------------
@@ -122,15 +136,15 @@ with st.sidebar:
     )
     api_key = ""
     if ai_mode.startswith("Groq"):
-        default_env_key = os.environ.get("GROQ_API_KEY", "")
+        default_env_key = _resolve_groq_key()
         api_key = st.text_input(
             "Groq API key",
             value=default_env_key,
             type="password",
             placeholder="Paste key from console.groq.com",
-            help="Or set GROQ_API_KEY in .env",
+            help="Uses sidebar value, then .env, then Streamlit secrets",
         )
-        st.caption("Loaded from `.env` when present.")
+        st.caption("Loaded from `.env` / Streamlit secrets when present.")
 
     animate_pipeline = st.checkbox("Animate stage playback", value=True)
 
@@ -314,14 +328,23 @@ with tab_live:
             )
 
             result = run_onboarding_pipeline(
-                submission_payload, pdf_target, ai_mode=ai_mode, api_key=api_key
+                submission_payload,
+                pdf_target,
+                ai_mode=ai_mode,
+                api_key=_resolve_groq_key(api_key),
             )
 
+            # Live run view — show each stage as the demo executes
             with st.status("Running 5-stage pipeline…", expanded=True) as status_box:
                 for stg in result["stages"]:
-                    st.markdown(stage_html(stg), unsafe_allow_html=True)
+                    status_box.update(
+                        label=f"Stage {stg['stage_num']}/5 · {stg['stage_name']}…",
+                        state="running",
+                        expanded=True,
+                    )
                     if animate_pipeline:
-                        time.sleep(0.28)
+                        time.sleep(0.35)
+                    st.markdown(stage_html(stg), unsafe_allow_html=True)
                 status_box.update(
                     label=f"Complete · {result['processing_ms']} ms · {result['final_status']}",
                     state="complete",

@@ -4,6 +4,17 @@ Vendor onboarding control plane for **Zamp PS-2**.
 
 Take a vendor submission (form / JSON + compliance PDF) → run deterministic cross-field checks → return a clear **APPROVED**, **PENDING**, or **REJECTED** decision with reasons, remediation, and an audit trail.
 
+### Deliverable 1 checklist
+
+| Requirement | Status in this project |
+|---|---|
+| Live automated process (not a mockup) | Yes — real 5-stage rule engine in `verification_engine.py` |
+| Real inputs | Yes — demo scenarios, blank form, JSON + PDF upload |
+| Real outputs | Yes — status, risk score, reasons, field matrix, vendor email, PDF extract |
+| Live run view (stages as they execute) | Yes — **Live verification** tab with animated stage playback |
+| Dashboard (history / status / outputs) | Yes — **Audit history** with filters, CSV export, run inspector |
+| Runnable for interview demo | Yes — `streamlit run app.py` locally or Streamlit Cloud |
+
 ---
 
 ## How this project works
