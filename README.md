@@ -106,7 +106,6 @@ source .venv/bin/activate
 
 ```powershell
 pip install -r requirements.txt
-pip install pandas pypdf
 ```
 
 ### 4. (Optional) Groq API key for LLM email drafts

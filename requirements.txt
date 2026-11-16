@@ -1,5 +1,7 @@
 streamlit
+pandas
+pypdf
 fpdf
 requests
-google-generativeai
 pdfplumber
+google-generativeai
