@@ -15,8 +15,15 @@ def extract_pdf_intelligence(pdf_file_or_path) -> dict:
     upper_text = raw_text.upper()
 
     def grab_header(label):
-        m = re.search(rf"{label}:\s*(.+)", raw_text)
-        return m.group(1).strip() if m else None
+        # Capture value even when FPDF wraps it onto the next line(s)
+        m = re.search(
+            rf"{re.escape(label)}:\s*(.+?)(?=\n[A-Z][A-Z0-9 /&\-]{{2,}}:|\nEXTRACTED|\Z)",
+            raw_text,
+            flags=re.DOTALL,
+        )
+        if not m:
+            return None
+        return re.sub(r"\s+", " ", m.group(1)).strip()
 
     # Universal Regex Scanners for arbitrary uploaded PDFs
     tax_match = re.search(
