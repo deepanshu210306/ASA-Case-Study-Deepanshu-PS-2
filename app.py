@@ -134,17 +134,11 @@ with st.sidebar:
         index=0,
         label_visibility="collapsed",
     )
-    api_key = ""
     if ai_mode.startswith("Groq"):
-        default_env_key = _resolve_groq_key()
-        api_key = st.text_input(
-            "Groq API key",
-            value=default_env_key,
-            type="password",
-            placeholder="Paste key from console.groq.com",
-            help="Uses sidebar value, then .env, then Streamlit secrets",
-        )
-        st.caption("Loaded from `.env` / Streamlit secrets when present.")
+        if _resolve_groq_key():
+            st.caption("Groq key loaded from secrets / `.env` (hidden).")
+        else:
+            st.caption("No Groq key found. Add `GROQ_API_KEY` in Streamlit Secrets or `.env`.")
 
     animate_pipeline = st.checkbox("Animate stage playback", value=True)
 
@@ -331,7 +325,7 @@ with tab_live:
                 submission_payload,
                 pdf_target,
                 ai_mode=ai_mode,
-                api_key=_resolve_groq_key(api_key),
+                api_key=_resolve_groq_key(),
             )
 
             # Live run view — show each stage as the demo executes

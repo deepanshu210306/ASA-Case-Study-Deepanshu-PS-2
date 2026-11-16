@@ -158,6 +158,12 @@ def synthesize_vendor_communication(
         elif ai_mode.startswith("Groq"):
             effective_key = (api_key or "").strip() or os.environ.get("GROQ_API_KEY", "").strip()
             if not effective_key:
+                try:
+                    import streamlit as st
+                    effective_key = str(st.secrets.get("GROQ_API_KEY", "")).strip()
+                except Exception:
+                    effective_key = ""
+            if not effective_key:
                 return deterministic_draft, "Deterministic Fallback (GROQ_API_KEY missing)"
             try:
                 resp = requests.post(
