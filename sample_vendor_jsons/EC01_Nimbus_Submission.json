@@ -1,0 +1,13 @@
+{
+  "scenario_id": "EC-01",
+  "vendor_name": "Nimbus Cloud Logistics Pvt Ltd",
+  "country": "India",
+  "state": "Karnataka",
+  "address": "Tower B, Prestige Tech Park, Outer Ring Road, Bengaluru, Karnataka 560103",
+  "tax_id": "07AAAPN9876B1Z2",
+  "bank_holder_name": "Nimbus Cloud Logistics Pvt Ltd",
+  "bank_routing": "GB29NWBK60161331926819",
+  "bank_account": "60161331926819",
+  "contact_name": "Vikram Sethi",
+  "contact_email": "ap@nimbuslogistics.io"
+}

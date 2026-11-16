@@ -1,0 +1,13 @@
+{
+  "scenario_id": "EC-04",
+  "vendor_name": "Vertex Digital Solutions",
+  "country": "United States",
+  "state": "California",
+  "address": "450 Mission Street, San Francisco, CA 94105",
+  "tax_id": "94-3829104",
+  "bank_holder_name": "Vertex Retail Group Inc",
+  "bank_routing": "ABA-121000358",
+  "bank_account": "44920193841",
+  "contact_name": "Elena Rostova",
+  "contact_email": "treasury@vertexdigital.com"
+}

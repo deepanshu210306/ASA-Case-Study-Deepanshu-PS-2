@@ -1,0 +1,13 @@
+{
+  "scenario_id": "EC-02",
+  "vendor_name": "Stellar Precision Tooling LLC",
+  "country": "United States",
+  "state": "Texas",
+  "address": "1400 Congress Ave, Suite 300, Austin, TX 78701",
+  "tax_id": "00-1928374",
+  "bank_holder_name": "Marcus Vance Personal Holdings",
+  "bank_routing": "ABA-111000025",
+  "bank_account": "88392019482",
+  "contact_name": "Marcus Vance",
+  "contact_email": "mvance@stellartooling.com"
+}
